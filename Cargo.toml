@@ -26,13 +26,13 @@ msp430 = { version = "0.4.0", features = ["critical-section-single-core"] }
 [profile.release]
 opt-level = "s"
 codegen-units = 1
-# lto = "fat"
+lto = "fat"
 # debug = true
 
 [profile.dev]
 opt-level = "s"
 codegen-units = 1
-# lto = "fat"
+lto = "fat"
 debug = true
 
 [profile.dev.package."*"]
