@@ -11,7 +11,7 @@ use crate::gpio::{Alternate1, Pin, Pin1, Pin2, Pin3, Pin5, Pin6, Pin7, P1, P4};
 use crate::hw_traits::eusci::{EUsciUart, UcaxStatw, Ucssel, UcxCtl0};
 use core::marker::PhantomData;
 use embedded_hal::serial::{Read, Write};
-use msp430fr2355 as pac;
+use msp430fr247x as pac;
 
 /// Bit order of transmit and receive
 #[derive(Clone, Copy)]

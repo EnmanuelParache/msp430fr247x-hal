@@ -4,7 +4,7 @@
 use embedded_hal::digital::v2::*;
 use embedded_hal::prelude::*;
 use msp430_rt::entry;
-use msp430fr2x5x_hal::{
+use msp430fr247x_hal::{
     capture::{CapTrigger, CaptureParts3, OverCapture, TimerConfig},
     clock::{ClockConfig, DcoclkFreqSel, MclkDiv, SmclkDiv},
     fram::Fram,
@@ -22,7 +22,7 @@ use void::ResultVoidExt;
 // since the last press. Sometimes we get 2 consecutive readings due to lack of debouncing.
 #[entry]
 fn main() -> ! {
-    let periph = msp430fr2355::Peripherals::take().unwrap();
+    let periph = msp430fr247x::Peripherals::take().unwrap();
 
     let mut fram = Fram::new(periph.FRCTL);
     Wdt::constrain(periph.WDT_A);

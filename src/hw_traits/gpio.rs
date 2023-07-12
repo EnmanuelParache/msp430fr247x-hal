@@ -1,5 +1,5 @@
 use super::Steal;
-use msp430fr2355 as pac;
+use msp430fr247x as pac;
 
 pub trait GpioPeriph: Steal {
     fn pxin_rd(&self) -> u8;
@@ -66,12 +66,12 @@ macro_rules! reg_methods {
 
         #[inline(always)]
         fn $set(&self, bits: u8) {
-            unsafe { self.$reg.set_bits(|w| w.bits(bits)) }
+            unsafe { self.$reg.write(|w| w.bits(bits)) }
         }
 
         #[inline(always)]
         fn $clear(&self, bits: u8) {
-            unsafe { self.$reg.clear_bits(|w| w.bits(bits)) }
+            unsafe { self.$reg.write(|w| w.bits(bits)) }
         }
     }
 }
@@ -87,7 +87,7 @@ macro_rules! gpio_impl {
             impl Steal for pac::$Px {
                 #[inline(always)]
                 unsafe fn steal() -> Self {
-                    pac::Peripherals::conjure().$Px
+                    pac::Peripherals::steal().$Px
                 }
             }
 
@@ -104,7 +104,7 @@ macro_rules! gpio_impl {
 
                 #[inline(always)]
                 fn pxout_toggle(&self, bits: u8) {
-                    unsafe { self.$pxout.toggle_bits(|w| w.bits(bits)) };
+                    unsafe { self.$pxout.modify(|r, w| w.bits(r.bits() ^ bits)) };
                 }
 
                 reg_methods!($pxout, pxout_rd, pxout_wr, pxout_set, pxout_clear);

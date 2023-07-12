@@ -5,7 +5,7 @@ use embedded_hal::digital::v2::OutputPin;
 use embedded_hal::prelude::*;
 use embedded_hal::serial::Read;
 use msp430_rt::entry;
-use msp430fr2x5x_hal::{
+use msp430fr247x_hal::{
     clock::{ClockConfig, DcoclkFreqSel, MclkDiv, Smclk, SmclkDiv},
     fram::Fram,
     gpio::Batch,
@@ -49,7 +49,7 @@ fn read_unwrap<R: Read<u8>>(rx: &mut R, err: char) -> u8 {
 // Only UART1 settings matter for the host
 #[entry]
 fn main() -> ! {
-    let periph = msp430fr2355::Peripherals::take().unwrap();
+    let periph = msp430fr247x::Peripherals::take().unwrap();
 
     let mut fram = Fram::new(periph.FRCTL);
     let _wdt = Wdt::constrain(periph.WDT_A);

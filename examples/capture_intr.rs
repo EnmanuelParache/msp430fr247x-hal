@@ -7,8 +7,8 @@ use critical_section::with;
 use embedded_hal::digital::v2::ToggleableOutputPin;
 use msp430::interrupt::{enable, Mutex};
 use msp430_rt::entry;
-use msp430fr2355::interrupt;
-use msp430fr2x5x_hal::{
+use msp430fr247x::interrupt;
+use msp430fr247x_hal::{
     capture::{
         CapCmp, CapTrigger, Capture, CaptureParts3, CaptureVector, TBxIV, TimerConfig, CCR1,
     },
@@ -27,9 +27,9 @@ use panic_msp430 as _;
 #[cfg(not(debug_assertions))]
 use panic_never as _;
 
-static CAPTURE: Mutex<UnsafeCell<Option<Capture<msp430fr2355::TB0, CCR1>>>> =
+static CAPTURE: Mutex<UnsafeCell<Option<Capture<msp430fr247x::TB0, CCR1>>>> =
     Mutex::new(UnsafeCell::new(None));
-static VECTOR: Mutex<UnsafeCell<Option<TBxIV<msp430fr2355::TB0>>>> =
+static VECTOR: Mutex<UnsafeCell<Option<TBxIV<msp430fr247x::TB0>>>> =
     Mutex::new(UnsafeCell::new(None));
 static RED_LED: Mutex<UnsafeCell<Option<Pin<P1, Pin0, Output>>>> =
     Mutex::new(UnsafeCell::new(None));
@@ -38,7 +38,7 @@ static RED_LED: Mutex<UnsafeCell<Option<Pin<P1, Pin0, Output>>>> =
 // so sometimes inputs are missed.
 #[entry]
 fn main() -> ! {
-    if let Some(periph) = msp430fr2355::Peripherals::take() {
+    if let Some(periph) = msp430fr247x::Peripherals::take() {
         let mut fram = Fram::new(periph.FRCTL);
         Wdt::constrain(periph.WDT_A);
 

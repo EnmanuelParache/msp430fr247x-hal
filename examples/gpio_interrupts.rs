@@ -3,14 +3,14 @@
 #![feature(abi_msp430_interrupt)]
 
 use critical_section::with;
-use msp430fr2355::interrupt;
+use msp430fr247x::interrupt;
 
 use core::cell::RefCell;
 use embedded_hal::digital::v2::*;
 use embedded_hal::timer::*;
 use msp430::interrupt::{enable as enable_int, Mutex};
 use msp430_rt::entry;
-use msp430fr2x5x_hal::{
+use msp430fr247x_hal::{
     clock::{ClockConfig, MclkDiv, SmclkDiv},
     fram::Fram,
     gpio::{Batch, GpioVector, Output, Pin, Pin0, PxIV, P1, P2},
@@ -27,7 +27,7 @@ static P2IV: Mutex<RefCell<Option<PxIV<P2>>>> = Mutex::new(RefCell::new(None));
 // Both green and red LEDs should blink when P2.3 LED is pressed
 #[entry]
 fn main() -> ! {
-    let periph = msp430fr2355::Peripherals::take().unwrap();
+    let periph = msp430fr247x::Peripherals::take().unwrap();
     let (_smclk, aclk) = ClockConfig::new(periph.CS)
         .mclk_refoclk(MclkDiv::_1)
         // 32 KHz SMCLK

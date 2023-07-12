@@ -1,6 +1,6 @@
 //! Power management module
 
-use msp430fr2355::PMM;
+use msp430fr247x::PMM;
 
 /// PMM type
 pub struct Pmm(());

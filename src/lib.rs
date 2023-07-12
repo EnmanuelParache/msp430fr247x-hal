@@ -4,7 +4,7 @@
 //! As of this writing, the only supported board is the MSP430FR2355.
 //!
 //! [`embedded_hal`]: https://github.com/rust-embedded/embedded-hal
-//! [`datasheet`]: http://www.ti.com/lit/ds/symlink/msp430fr2355.pdf
+//! [`datasheet`]: http://www.ti.com/lit/ds/symlink/msp430fr2475.pdf
 //! [`User's guide`]: http://www.ti.com/lit/ug/slau445i/slau445i.pdf
 //!
 //! # Usage
@@ -43,4 +43,4 @@ pub mod watchdog;
 mod hw_traits;
 mod util;
 
-pub use msp430fr2355 as pac;
+pub use msp430fr247x as pac;

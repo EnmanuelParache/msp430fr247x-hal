@@ -8,13 +8,13 @@
 //! on an individual basis.
 
 use crate::gpio::{
-    Alternate1, Alternate2, Floating, Input, Pin, Pin0, Pin1, Pin2, Pin3, Pin4, Pin5, Pin6, Pin7,
-    P1, P2, P5, P6,
+    Alternate2, Floating, Input, Pin, Pin6, Pin7,
+    P1
 };
 use crate::hw_traits::timerb::{CCRn, Ccis, Cm};
 use crate::timer::{read_tbxiv, CapCmpTimer3, CapCmpTimer7, TimerVector};
 use core::marker::PhantomData;
-use msp430fr2355 as pac;
+use msp430fr247x as pac;
 
 pub use crate::timer::{
     CapCmp, TimerConfig, TimerDiv, TimerExDiv, TimerPeriph, CCR0, CCR1, CCR2, CCR3, CCR4, CCR5,
@@ -80,32 +80,32 @@ impl CapturePeriph for pac::TB0 {
     type Gpio6 = ();
 }
 
-impl CapturePeriph for pac::TB1 {
-    type Gpio1 = Pin<P2, Pin0, Alternate1<Input<Floating>>>;
-    type Gpio2 = Pin<P2, Pin1, Alternate1<Input<Floating>>>;
-    type Gpio3 = ();
-    type Gpio4 = ();
-    type Gpio5 = ();
-    type Gpio6 = ();
-}
+// impl CapturePeriph for pac::TB1 {
+//     type Gpio1 = Pin<P2, Pin0, Alternate1<Input<Floating>>>;
+//     type Gpio2 = Pin<P2, Pin1, Alternate1<Input<Floating>>>;
+//     type Gpio3 = ();
+//     type Gpio4 = ();
+//     type Gpio5 = ();
+//     type Gpio6 = ();
+// }
 
-impl CapturePeriph for pac::TB2 {
-    type Gpio1 = Pin<P5, Pin0, Alternate1<Input<Floating>>>;
-    type Gpio2 = Pin<P5, Pin1, Alternate1<Input<Floating>>>;
-    type Gpio3 = ();
-    type Gpio4 = ();
-    type Gpio5 = ();
-    type Gpio6 = ();
-}
+// impl CapturePeriph for pac::TB2 {
+//     type Gpio1 = Pin<P5, Pin0, Alternate1<Input<Floating>>>;
+//     type Gpio2 = Pin<P5, Pin1, Alternate1<Input<Floating>>>;
+//     type Gpio3 = ();
+//     type Gpio4 = ();
+//     type Gpio5 = ();
+//     type Gpio6 = ();
+// }
 
-impl CapturePeriph for pac::TB3 {
-    type Gpio1 = Pin<P6, Pin0, Alternate1<Input<Floating>>>;
-    type Gpio2 = Pin<P6, Pin1, Alternate1<Input<Floating>>>;
-    type Gpio3 = Pin<P6, Pin2, Alternate1<Input<Floating>>>;
-    type Gpio4 = Pin<P6, Pin3, Alternate1<Input<Floating>>>;
-    type Gpio5 = Pin<P6, Pin4, Alternate1<Input<Floating>>>;
-    type Gpio6 = Pin<P6, Pin5, Alternate1<Input<Floating>>>;
-}
+// impl CapturePeriph for pac::TB3 {
+//     type Gpio1 = Pin<P6, Pin0, Alternate1<Input<Floating>>>;
+//     type Gpio2 = Pin<P6, Pin1, Alternate1<Input<Floating>>>;
+//     type Gpio3 = Pin<P6, Pin2, Alternate1<Input<Floating>>>;
+//     type Gpio4 = Pin<P6, Pin3, Alternate1<Input<Floating>>>;
+//     type Gpio5 = Pin<P6, Pin4, Alternate1<Input<Floating>>>;
+//     type Gpio6 = Pin<P6, Pin5, Alternate1<Input<Floating>>>;
+// }
 
 macro_rules! config_fn {
     (methods $config_sel_b:ident, $config_trigger:ident, $pin:ident) => {

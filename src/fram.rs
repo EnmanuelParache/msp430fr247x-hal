@@ -1,6 +1,6 @@
 //! FRAM controller
 
-use msp430fr2355 as pac;
+use msp430fr247x as pac;
 use pac::FRCTL;
 
 /// FRAM controller

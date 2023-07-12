@@ -11,7 +11,7 @@
 use core::arch::asm;
 
 use crate::fram::{Fram, WaitStates};
-use msp430fr2355 as pac;
+use msp430fr247x as pac;
 use pac::cs::csctl1::DCORSEL_A;
 use pac::cs::csctl4::{SELA_A, SELMS_A};
 pub use pac::cs::csctl5::{DIVM_A as MclkDiv, DIVS_A as SmclkDiv};
