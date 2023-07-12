@@ -11,14 +11,14 @@
 //! conversions on each pin is limited by the hardware capabilities in the [`datasheet`], so not
 //! every pin in every configuration can be converted to every alternate functionality.
 //!
-//! [`datasheet`]: http://www.ti.com/lit/ds/symlink/msp430fr2355.pdf
+//! [`datasheet`]: http://www.ti.com/lit/ds/symlink/msp430fr2475.pdf
 
 pub use crate::batch_gpio::*;
 use crate::hw_traits::gpio::{GpioPeriph, IntrPeriph};
 use crate::util::BitsExt;
 use core::marker::PhantomData;
 use embedded_hal::digital::v2::{InputPin, OutputPin, StatefulOutputPin, ToggleableOutputPin};
-use msp430fr2355 as pac;
+use msp430fr247x as pac;
 pub use pac::{P1, P2, P3, P4, P5, P6};
 
 mod sealed {

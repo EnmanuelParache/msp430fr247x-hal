@@ -1,1 +1,1 @@
-mspdebug --allow-fw-update tilib -C <(echo "gdb")
+sudo mspdebug -v 3300 --fet-force-id MSP430FR2476 -C mspdebug.cfg tilib

@@ -5,7 +5,7 @@
 use crate::clock::Smclk;
 use core::marker::PhantomData;
 use embedded_hal::timer::{Cancel, CountDown, Periodic};
-use msp430fr2355 as pac;
+use msp430fr247x as pac;
 use pac::{rtc::rtcctl::RTCSS_A, RTC};
 use void::Void;
 
@@ -88,13 +88,13 @@ impl<SRC: RtcClockSrc> Rtc<SRC> {
     /// Enable RTC timer interrupts
     #[inline]
     pub fn enable_interrupts(&mut self) {
-        unsafe { self.periph.rtcctl.set_bits(|w| w.rtcie().set_bit()) };
+        self.periph.rtcctl.write(|w| w.rtcie().set_bit());
     }
 
     /// Disable RTC timer interrupts
     #[inline]
     pub fn disable_interrupts(&mut self) {
-        unsafe { self.periph.rtcctl.clear_bits(|w| w.rtcie().clear_bit()) };
+        self.periph.rtcctl.write(|w| w.rtcie().clear_bit());
     }
 
     /// Clear interrupt flag
@@ -145,12 +145,11 @@ impl<SRC: RtcClockSrc> Cancel for Rtc<SRC> {
 
     #[inline]
     fn cancel(&mut self) -> Result<(), Self::Error> {
-        unsafe {
+        
             self.periph
                 .rtcctl
                 // Bit pattern is all 0s, so we can use clear instead of modify
-                .clear_bits(|w| w.rtcss().variant(RTCSS_A::DISABLED))
-        };
+                .write(|w| w.rtcss().variant(RTCSS_A::DISABLED));
         Ok(())
     }
 }

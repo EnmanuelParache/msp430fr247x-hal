@@ -4,7 +4,7 @@
 use embedded_hal::digital::v2::*;
 use embedded_hal::prelude::*;
 use msp430_rt::entry;
-use msp430fr2x5x_hal::{
+use msp430fr247x_hal::{
     clock::{ClockConfig, DcoclkFreqSel, MclkDiv, SmclkDiv},
     fram::Fram,
     gpio::Batch,
@@ -19,7 +19,7 @@ use void::ResultVoidExt;
 // 0.5 second on, 0.5 second off
 #[entry]
 fn main() -> ! {
-    let periph = msp430fr2355::Peripherals::take().unwrap();
+    let periph = msp430fr247x::Peripherals::take().unwrap();
 
     let mut fram = Fram::new(periph.FRCTL);
     Wdt::constrain(periph.WDT_A);

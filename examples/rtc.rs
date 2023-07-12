@@ -5,7 +5,7 @@ use embedded_hal::digital::v2::*;
 use embedded_hal::prelude::*;
 use embedded_hal::timer::Cancel;
 use msp430_rt::entry;
-use msp430fr2x5x_hal::{
+use msp430fr247x_hal::{
     clock::{ClockConfig, MclkDiv, SmclkDiv},
     fram::Fram,
     gpio::Batch,
@@ -19,7 +19,7 @@ use panic_msp430 as _;
 // Pressing P2.3 button toggles red LED and halts program
 #[entry]
 fn main() -> ! {
-    let periph = msp430fr2355::Peripherals::take().unwrap();
+    let periph = msp430fr247x::Peripherals::take().unwrap();
 
     Wdt::constrain(periph.WDT_A);
 

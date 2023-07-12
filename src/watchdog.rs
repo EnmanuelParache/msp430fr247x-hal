@@ -8,7 +8,7 @@ use crate::clock::{Aclk, Smclk};
 use core::marker::PhantomData;
 use embedded_hal::timer::{Cancel, CountDown, Periodic};
 use embedded_hal::watchdog::{Watchdog, WatchdogDisable, WatchdogEnable};
-use msp430fr2355 as pac;
+use msp430fr247x as pac;
 use pac::wdt_a::wdtctl::WDTSSEL_A;
 
 const PASSWORD: u8 = 0x5A;
@@ -190,7 +190,7 @@ impl CountDown for Wdt<IntervalMode> {
     fn wait(&mut self) -> nb::Result<(), void::Void> {
         let sfr = unsafe { &*pac::SFR::ptr() };
         if sfr.sfrifg1.read().wdtifg().is_wdtifg_1() {
-            unsafe { sfr.sfrifg1.clear_bits(|w| w.wdtifg().clear_bit()) };
+            sfr.sfrifg1.write(|w| w.wdtifg().clear_bit());
             Ok(())
         } else {
             Err(nb::Error::WouldBlock)
@@ -238,7 +238,7 @@ impl Wdt<IntervalMode> {
         wdt.pause();
         // Wipe out old interrupt flag, which may cause a watchdog reset
         let sfr = unsafe { &*pac::SFR::ptr() };
-        unsafe { sfr.sfrifg1.clear_bits(|w| w.wdtifg().clear_bit()) };
+        sfr.sfrifg1.write(|w| w.wdtifg().clear_bit());
         wdt
     }
 
@@ -248,7 +248,7 @@ impl Wdt<IntervalMode> {
     #[inline]
     pub fn enable_interrupts(&mut self) -> &mut Self {
         let sfr = unsafe { &*pac::SFR::ptr() };
-        unsafe { sfr.sfrie1.set_bits(|w| w.wdtie().set_bit()) };
+        sfr.sfrie1.write(|w| w.wdtie().set_bit());
         self
     }
 
@@ -256,7 +256,7 @@ impl Wdt<IntervalMode> {
     #[inline]
     pub fn disable_interrupts(&mut self) -> &mut Self {
         let sfr = unsafe { &*pac::SFR::ptr() };
-        unsafe { sfr.sfrie1.clear_bits(|w| w.wdtie().clear_bit()) };
+        sfr.sfrie1.write(|w| w.wdtie().clear_bit());
         self
     }
 }

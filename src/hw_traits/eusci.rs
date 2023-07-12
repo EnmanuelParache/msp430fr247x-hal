@@ -1,5 +1,5 @@
 use super::Steal;
-use msp430fr2355 as pac;
+use msp430fr247x as pac;
 
 pub enum Ucssel {
     Uclk,
@@ -67,7 +67,7 @@ macro_rules! eusci_a_impl {
         impl Steal for pac::$EUsci {
             #[inline(always)]
             unsafe fn steal() -> Self {
-                pac::Peripherals::conjure().$EUsci
+                pac::Peripherals::steal().$EUsci
             }
         }
 
@@ -100,22 +100,22 @@ macro_rules! eusci_a_impl {
 
             #[inline(always)]
             fn txie_set(&self) {
-                unsafe { self.$ucaxie().set_bits(|w| w.uctxie().set_bit()) };
+                self.$ucaxie().write(|w| w.uctxie().set_bit());
             }
 
             #[inline(always)]
             fn txie_clear(&self) {
-                unsafe { self.$ucaxie().clear_bits(|w| w.uctxie().clear_bit()) };
+                self.$ucaxie().write(|w| w.uctxie().clear_bit());
             }
 
             #[inline(always)]
             fn rxie_set(&self) {
-                unsafe { self.$ucaxie().set_bits(|w| w.ucrxie().set_bit()) };
+                self.$ucaxie().write(|w| w.ucrxie().set_bit());
             }
 
             #[inline(always)]
             fn rxie_clear(&self) {
-                unsafe { self.$ucaxie().clear_bits(|w| w.ucrxie().clear_bit()) };
+                self.$ucaxie().write(|w| w.ucrxie().clear_bit());
             }
 
             #[inline(always)]

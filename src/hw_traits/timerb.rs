@@ -1,5 +1,5 @@
 use super::Steal;
-use msp430fr2355 as pac;
+use msp430fr247x as pac;
 
 pub enum Tbssel {
     Tbxclk,
@@ -166,17 +166,17 @@ macro_rules! ccrn_impl {
 
             #[inline(always)]
             fn ccifg_clr(&self) {
-                unsafe { self.$tbxcctln.clear_bits(|w| w.ccifg().clear_bit()) };
+                self.$tbxcctln.write(|w| w.ccifg().clear_bit());
             }
 
             #[inline(always)]
             fn ccie_set(&self) {
-                unsafe { self.$tbxcctln.set_bits(|w| w.ccie().set_bit()) };
+                self.$tbxcctln.write(|w| w.ccie().set_bit());
             }
 
             #[inline(always)]
             fn ccie_clr(&self) {
-                unsafe { self.$tbxcctln.clear_bits(|w| w.ccie().clear_bit()) };
+                self.$tbxcctln.write(|w| w.ccie().clear_bit());
             }
 
             #[inline(always)]
@@ -187,10 +187,8 @@ macro_rules! ccrn_impl {
 
             #[inline(always)]
             fn cov_ccifg_clr(&self) {
-                unsafe {
                     self.$tbxcctln
-                        .clear_bits(|w| w.ccifg().clear_bit().cov().clear_bit())
-                };
+                        .write(|w| w.ccifg().clear_bit().cov().clear_bit());
             }
         }
     };
@@ -201,14 +199,14 @@ macro_rules! timerb_impl {
         impl Steal for pac::$TBx {
             #[inline(always)]
             unsafe fn steal() -> Self {
-                pac::Peripherals::conjure().$TBx
+                pac::Peripherals::steal().$TBx
             }
         }
 
         impl TimerB for pac::$TBx {
             #[inline(always)]
             fn reset(&self) {
-                unsafe { self.$tbxctl.set_bits(|w| w.tbclr().set_bit()) };
+                self.$tbxctl.write(|w| w.tbclr().set_bit());
             }
 
             #[inline(always)]
@@ -250,7 +248,7 @@ macro_rules! timerb_impl {
 
             #[inline(always)]
             fn stop(&self) {
-                unsafe { self.$tbxctl.clear_bits(|w| w.mc().stop()) };
+                self.$tbxctl.write(|w| w.mc().stop());
             }
 
             #[inline(always)]
@@ -265,17 +263,17 @@ macro_rules! timerb_impl {
 
             #[inline(always)]
             fn tbifg_clr(&self) {
-                unsafe { self.$tbxctl.clear_bits(|w| w.tbifg().clear_bit()) };
+                self.$tbxctl.write(|w| w.tbifg().clear_bit());
             }
 
             #[inline(always)]
             fn tbie_set(&self) {
-                unsafe { self.$tbxctl.set_bits(|w| w.tbie().set_bit()) };
+                self.$tbxctl.write(|w| w.tbie().set_bit());
             }
 
             #[inline(always)]
             fn tbie_clr(&self) {
-                unsafe { self.$tbxctl.clear_bits(|w| w.tbie().clear_bit()) };
+                self.$tbxctl.write(|w| w.tbie().clear_bit());
             }
 
             #[inline(always)]
@@ -299,39 +297,39 @@ timerb_impl!(
     [CCR2, tb0cctl2, tb0ccr2]
 );
 
-timerb_impl!(
-    TB1,
-    tb1,
-    tb1ctl,
-    tb1ex0,
-    tb1iv,
-    [CCR0, tb1cctl0, tb1ccr0],
-    [CCR1, tb1cctl1, tb1ccr1],
-    [CCR2, tb1cctl2, tb1ccr2]
-);
+// timerb_impl!(
+//     TB1,
+//     tb1,
+//     tb1ctl,
+//     tb1ex0,
+//     tb1iv,
+//     [CCR0, tb1cctl0, tb1ccr0],
+//     [CCR1, tb1cctl1, tb1ccr1],
+//     [CCR2, tb1cctl2, tb1ccr2]
+// );
 
-timerb_impl!(
-    TB2,
-    tb2,
-    tb2ctl,
-    tb2ex0,
-    tb2iv,
-    [CCR0, tb2cctl0, tb2ccr0],
-    [CCR1, tb2cctl1, tb2ccr1],
-    [CCR2, tb2cctl2, tb2ccr2]
-);
+// timerb_impl!(
+//     TB2,
+//     tb2,
+//     tb2ctl,
+//     tb2ex0,
+//     tb2iv,
+//     [CCR0, tb2cctl0, tb2ccr0],
+//     [CCR1, tb2cctl1, tb2ccr1],
+//     [CCR2, tb2cctl2, tb2ccr2]
+// );
 
-timerb_impl!(
-    TB3,
-    tb3,
-    tb3ctl,
-    tb3ex0,
-    tb3iv,
-    [CCR0, tb3cctl0, tb3ccr0],
-    [CCR1, tb3cctl1, tb3ccr1],
-    [CCR2, tb3cctl2, tb3ccr2],
-    [CCR3, tb3cctl3, tb3ccr3],
-    [CCR4, tb3cctl4, tb3ccr4],
-    [CCR5, tb3cctl5, tb3ccr5],
-    [CCR6, tb3cctl6, tb3ccr6]
-);
+// timerb_impl!(
+//     TB3,
+//     tb3,
+//     tb3ctl,
+//     tb3ex0,
+//     tb3iv,
+//     [CCR0, tb3cctl0, tb3ccr0],
+//     [CCR1, tb3cctl1, tb3ccr1],
+//     [CCR2, tb3cctl2, tb3ccr2],
+//     [CCR3, tb3cctl3, tb3ccr3],
+//     [CCR4, tb3cctl4, tb3ccr4],
+//     [CCR5, tb3cctl5, tb3ccr5],
+//     [CCR6, tb3cctl6, tb3ccr6]
+// );

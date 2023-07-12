@@ -1,6 +1,6 @@
-# `msp430fr2x5x-hal`
+# `msp430fr247x-hal`
 
-> HAL for microcontrollers MSP430FR2355, MSP430FR2353, MSP430FR2153 and MSP430FR2155.
+> HAL for microcontrollers MSP430FR2475 and MSP430FR2476. Forked from [msp430fr2x5x-hal](https://github.com/YuhanLiin/msp430fr2x5x-hal).
 
 # License
 
