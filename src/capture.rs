@@ -8,8 +8,8 @@
 //! on an individual basis.
 
 use crate::gpio::{
-    Alternate2, Floating, Input, Pin, Pin6, Pin7,
-    P1
+    Alternate2, Floating, Input, Pin, Pin0, Pin1, Pin2, Pin3, Pin4, Pin7,
+    P4, P5
 };
 use crate::hw_traits::timerb::{CCRn, Ccis, Cm};
 use crate::timer::{read_tbxiv, CapCmpTimer3, CapCmpTimer7, TimerVector};
@@ -72,12 +72,12 @@ pub trait CapturePeriph: TimerPeriph {
     type Gpio6;
 }
 impl CapturePeriph for pac::TB0 {
-    type Gpio1 = Pin<P1, Pin6, Alternate2<Input<Floating>>>;
-    type Gpio2 = Pin<P1, Pin7, Alternate2<Input<Floating>>>;
-    type Gpio3 = ();
-    type Gpio4 = ();
-    type Gpio5 = ();
-    type Gpio6 = ();
+    type Gpio1 = Pin<P4, Pin7, Alternate2<Input<Floating>>>;
+    type Gpio2 = Pin<P5, Pin0, Alternate2<Input<Floating>>>;
+    type Gpio3 = Pin<P5, Pin1, Alternate2<Input<Floating>>>;
+    type Gpio4 = Pin<P5, Pin2, Alternate2<Input<Floating>>>;
+    type Gpio5 = Pin<P5, Pin3, Alternate2<Input<Floating>>>;
+    type Gpio6 = Pin<P5, Pin4, Alternate2<Input<Floating>>>;
 }
 
 // impl CapturePeriph for pac::TB1 {

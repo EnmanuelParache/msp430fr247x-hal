@@ -9,7 +9,7 @@ use msp430fr247x_hal::{
     fram::Fram,
     gpio::Batch,
     pmm::Pmm,
-    timer::{CapCmp, SubTimer, Timer, TimerConfig, TimerDiv, TimerExDiv, TimerParts3, TimerPeriph},
+    timer::{CapCmp, SubTimer, Timer, TimerConfig, TimerDiv, TimerExDiv, TimerParts7, TimerPeriph},
     watchdog::Wdt,
 };
 use nb::block;
@@ -36,7 +36,7 @@ fn main() -> ! {
         .aclk_vloclk()
         .freeze(&mut fram);
 
-    let parts = TimerParts3::new(
+    let parts = TimerParts7::new(
         periph.TB0,
         TimerConfig::aclk(&aclk).clk_div(TimerDiv::_2, TimerExDiv::_5),
     );

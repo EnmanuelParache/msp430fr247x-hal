@@ -1,6 +1,6 @@
 [package]
 name = "msp430fr247x-hal"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["YuhanLiin <linyuhan0315@hotmail.com>", "EnmanuelParache <enmanuelparache@gmail.com>"]
 edition = "2021"
 description = "Implementation of embedded-hal for microcontrollers MSP430FR2475 and MSP430FR2476"

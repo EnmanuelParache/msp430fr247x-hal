@@ -35,12 +35,13 @@ fn main() -> ! {
             .freeze(&mut fram);
 
         let pmm = Pmm::new(periph.PMM);
-        let mut led = Batch::new(periph.P1).split(&pmm).pin0.to_output();
-        let p4 = Batch::new(periph.P4).split(&pmm);
+        let p1 = Batch::new(periph.P1).split(&pmm);
+        let mut led = p1.pin0.to_output();
+
         led.set_low().ok();
 
         let (mut tx, mut rx) = SerialConfig::new(
-            periph.E_USCI_A1,
+            periph.E_USCI_A0,
             BitOrder::LsbFirst,
             BitCount::EightBits,
             StopBits::OneStopBit,
@@ -50,7 +51,7 @@ fn main() -> ! {
             9600,
         )
         .use_aclk(&aclk)
-        .split(p4.pin3.to_alternate1(), p4.pin2.to_alternate1());
+        .split(p1.pin4.to_alternate1(), p1.pin5.to_alternate1());
 
         led.set_high().ok();
         tx.bwrite_all(b"HELLO\n").ok();

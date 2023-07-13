@@ -294,42 +294,9 @@ timerb_impl!(
     tb0iv,
     [CCR0, tb0cctl0, tb0ccr0],
     [CCR1, tb0cctl1, tb0ccr1],
-    [CCR2, tb0cctl2, tb0ccr2]
+    [CCR2, tb0cctl2, tb0ccr2],
+    [CCR3, tb0cctl3, tb0ccr3],
+    [CCR4, tb0cctl4, tb0ccr4],
+    [CCR5, tb0cctl5, tb0ccr5],
+    [CCR6, tb0cctl6, tb0ccr6]
 );
-
-// timerb_impl!(
-//     TB1,
-//     tb1,
-//     tb1ctl,
-//     tb1ex0,
-//     tb1iv,
-//     [CCR0, tb1cctl0, tb1ccr0],
-//     [CCR1, tb1cctl1, tb1ccr1],
-//     [CCR2, tb1cctl2, tb1ccr2]
-// );
-
-// timerb_impl!(
-//     TB2,
-//     tb2,
-//     tb2ctl,
-//     tb2ex0,
-//     tb2iv,
-//     [CCR0, tb2cctl0, tb2ccr0],
-//     [CCR1, tb2cctl1, tb2ccr1],
-//     [CCR2, tb2cctl2, tb2ccr2]
-// );
-
-// timerb_impl!(
-//     TB3,
-//     tb3,
-//     tb3ctl,
-//     tb3ex0,
-//     tb3iv,
-//     [CCR0, tb3cctl0, tb3ccr0],
-//     [CCR1, tb3cctl1, tb3ccr1],
-//     [CCR2, tb3cctl2, tb3ccr2],
-//     [CCR3, tb3cctl3, tb3ccr3],
-//     [CCR4, tb3cctl4, tb3ccr4],
-//     [CCR5, tb3cctl5, tb3ccr5],
-//     [CCR6, tb3cctl6, tb3ccr6]
-// );

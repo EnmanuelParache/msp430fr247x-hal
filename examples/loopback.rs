@@ -62,14 +62,14 @@ fn main() -> ! {
 
     let pmm = Pmm::new(periph.PMM);
     let p1 = Batch::new(periph.P1).split(&pmm);
-    let p4 = Batch::new(periph.P4).split(&pmm);
+    let p2 = Batch::new(periph.P2).split(&pmm);
     let mut led = p1.pin0.to_output();
     led.set_low().ok();
 
     let (mut tx0, mut rx0) = setup_uart(
         periph.E_USCI_A0,
-        p1.pin7.to_alternate1().into(),
-        p1.pin6.to_alternate1().into(),
+        p1.pin4.to_alternate1().into(),
+        p1.pin5.to_alternate1().into(),
         Parity::EvenParity,
         Loopback::Loopback,
         20000,
@@ -78,8 +78,8 @@ fn main() -> ! {
 
     let (mut tx1, mut rx1) = setup_uart(
         periph.E_USCI_A1,
-        p4.pin3.to_alternate1().into(),
-        p4.pin2.to_alternate1().into(),
+        p2.pin6.to_alternate1().into(),
+        p2.pin5.to_alternate1().into(),
         Parity::NoParity,
         Loopback::NoLoop,
         19200,

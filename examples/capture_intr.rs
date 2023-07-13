@@ -10,7 +10,7 @@ use msp430_rt::entry;
 use msp430fr247x::interrupt;
 use msp430fr247x_hal::{
     capture::{
-        CapCmp, CapTrigger, Capture, CaptureParts3, CaptureVector, TBxIV, TimerConfig, CCR1,
+        CapCmp, CapTrigger, Capture, CaptureParts7, CaptureVector, TBxIV, TimerConfig, CCR1,
     },
     clock::{ClockConfig, DcoclkFreqSel, MclkDiv, SmclkDiv},
     fram::Fram,
@@ -43,6 +43,7 @@ fn main() -> ! {
         Wdt::constrain(periph.WDT_A);
 
         let pmm = Pmm::new(periph.PMM);
+        let p4 = Batch::new(periph.P4).split(&pmm);
         let p1 = Batch::new(periph.P1)
             .config_pin0(|p| p.to_output())
             .split(&pmm);
@@ -56,8 +57,8 @@ fn main() -> ! {
             .aclk_vloclk()
             .freeze(&mut fram);
 
-        let captures = CaptureParts3::config(periph.TB0, TimerConfig::aclk(&aclk))
-            .config_cap1_input_A(p1.pin6.to_alternate2())
+        let captures = CaptureParts7::config(periph.TB0, TimerConfig::aclk(&aclk))
+            .config_cap1_input_A(p4.pin7.to_alternate2())
             .config_cap1_trigger(CapTrigger::FallingEdge)
             .commit();
         let mut capture = captures.cap1;

@@ -8,7 +8,7 @@
 
 use crate::gpio::{
      Alternate2, ChangeSelectBits, Output, Pin,
-    Pin6, Pin7, P1
+    Pin0, Pin1, Pin2, Pin3, Pin4, Pin7, P5, P4
 };
 use crate::hw_traits::timerb::{CCRn, Outmod};
 use crate::timer::{CapCmpTimer3, CapCmpTimer7};
@@ -53,56 +53,34 @@ pub trait PwmPeriph<C>: CapCmp<C> + CapCmp<CCR0> {
 }
 
 impl PwmPeriph<CCR1> for pac::TB0 {
-    type Gpio = Pin<P1, Pin6, Alternate2<Output>>;
+    type Gpio = Pin<P4, Pin7, Alternate2<Output>>;
     const ALT: Alt = Alt::Alt2;
 }
+
 impl PwmPeriph<CCR2> for pac::TB0 {
-    type Gpio = Pin<P1, Pin7, Alternate2<Output>>;
+    type Gpio = Pin<P5, Pin0, Alternate2<Output>>;
     const ALT: Alt = Alt::Alt2;
 }
 
-// impl PwmPeriph<CCR1> for pac::TB1 {
-//     type Gpio = Pin<P2, Pin0, Alternate1<Output>>;
-//     const ALT: Alt = Alt::Alt1;
-// }
-// impl PwmPeriph<CCR2> for pac::TB1 {
-//     type Gpio = Pin<P2, Pin1, Alternate1<Output>>;
-//     const ALT: Alt = Alt::Alt1;
-// }
+impl PwmPeriph<CCR3> for pac::TB0 {
+    type Gpio = Pin<P5, Pin1, Alternate2<Output>>;
+    const ALT: Alt = Alt::Alt2;
+}
 
-// impl PwmPeriph<CCR1> for pac::TB2 {
-//     type Gpio = Pin<P5, Pin0, Alternate1<Output>>;
-//     const ALT: Alt = Alt::Alt1;
-// }
-// impl PwmPeriph<CCR2> for pac::TB2 {
-//     type Gpio = Pin<P5, Pin1, Alternate1<Output>>;
-//     const ALT: Alt = Alt::Alt1;
-// }
+impl PwmPeriph<CCR4> for pac::TB0 {
+    type Gpio = Pin<P5, Pin2, Alternate2<Output>>;
+    const ALT: Alt = Alt::Alt2;
+}
 
-// impl PwmPeriph<CCR1> for pac::TB3 {
-//     type Gpio = Pin<P6, Pin0, Alternate1<Output>>;
-//     const ALT: Alt = Alt::Alt1;
-// }
-// impl PwmPeriph<CCR2> for pac::TB3 {
-//     type Gpio = Pin<P6, Pin1, Alternate1<Output>>;
-//     const ALT: Alt = Alt::Alt1;
-// }
-// impl PwmPeriph<CCR3> for pac::TB3 {
-//     type Gpio = Pin<P6, Pin2, Alternate1<Output>>;
-//     const ALT: Alt = Alt::Alt1;
-// }
-// impl PwmPeriph<CCR4> for pac::TB3 {
-//     type Gpio = Pin<P6, Pin3, Alternate1<Output>>;
-//     const ALT: Alt = Alt::Alt1;
-// }
-// impl PwmPeriph<CCR5> for pac::TB3 {
-//     type Gpio = Pin<P6, Pin4, Alternate1<Output>>;
-//     const ALT: Alt = Alt::Alt1;
-// }
-// impl PwmPeriph<CCR6> for pac::TB3 {
-//     type Gpio = Pin<P6, Pin5, Alternate1<Output>>;
-//     const ALT: Alt = Alt::Alt1;
-// }
+impl PwmPeriph<CCR5> for pac::TB0 {
+    type Gpio = Pin<P4, Pin3, Alternate2<Output>>;
+    const ALT: Alt = Alt::Alt2;
+}
+
+impl PwmPeriph<CCR6> for pac::TB0 {
+    type Gpio = Pin<P4, Pin4, Alternate2<Output>>;
+    const ALT: Alt = Alt::Alt2;
+}
 
 fn setup_pwm<T: TimerPeriph>(timer: &T, config: TimerConfig<T>, period: u16) {
     config.write_regs(timer);

@@ -13,10 +13,10 @@ fn main() -> ! {
     let pmm = Pmm::new(periph.PMM);
     let p1 = Batch::new(periph.P1).split(&pmm);
 
-    // Convert P1.0 to SMCLK output
+    // Convert P1.7 to SMCLK output
     // Alternate 1 to alternate 2 conversion requires using SELC register
-    // Expect red LED to light up
-    p1.pin0.to_output().to_alternate1().to_alternate2();
+    // Expect LED connected to P1.7 to light up
+    p1.pin7.to_output().to_alternate1().to_alternate2();
 
     loop {
         msp430::asm::nop();

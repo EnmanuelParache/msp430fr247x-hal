@@ -8,7 +8,7 @@
 //! `Capture` and `Pwm`.
 
 use crate::clock::{Aclk, Smclk};
-use crate::gpio::{Alternate1, Floating, Input, Pin, Pin7, P2};
+use crate::gpio::{Alternate1, Floating, Input, Pin, Pin2, P6};
 use crate::hw_traits::timerb::{CCRn, Tbssel, TimerB};
 use core::marker::PhantomData;
 use embedded_hal::timer::{Cancel, CountDown, Periodic};
@@ -46,9 +46,9 @@ pub trait CapCmpTimer7:
 }
 
 impl TimerPeriph for pac::TB0 {
-    type Tbxclk = Pin<P2, Pin7, Alternate1<Input<Floating>>>;
+    type Tbxclk = Pin<P6, Pin2, Alternate1<Input<Floating>>>;
 }
-impl CapCmpTimer3 for pac::TB0 {}
+impl CapCmpTimer7 for pac::TB0 {}
 
 /// Configuration object for the TimerB peripheral
 ///

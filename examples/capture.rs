@@ -5,7 +5,7 @@ use embedded_hal::digital::v2::*;
 use embedded_hal::prelude::*;
 use msp430_rt::entry;
 use msp430fr247x_hal::{
-    capture::{CapTrigger, CaptureParts3, OverCapture, TimerConfig},
+    capture::{CapTrigger, CaptureParts7, OverCapture, TimerConfig},
     clock::{ClockConfig, DcoclkFreqSel, MclkDiv, SmclkDiv},
     fram::Fram,
     gpio::Batch,
@@ -40,7 +40,7 @@ fn main() -> ! {
         .freeze(&mut fram);
 
     let mut tx = SerialConfig::new(
-        periph.E_USCI_A1,
+        periph.E_USCI_A0,
         BitOrder::LsbFirst,
         BitCount::EightBits,
         StopBits::OneStopBit,
@@ -49,11 +49,11 @@ fn main() -> ! {
         9600,
     )
     .use_smclk(&smclk)
-    .tx_only(p4.pin3.to_alternate1());
+    .tx_only(p1.pin4.to_alternate1());
 
-    let captures = CaptureParts3::config(periph.TB0, TimerConfig::aclk(&aclk))
-        .config_cap1_input_A(p1.pin6.to_alternate2())
-        .config_cap1_trigger(CapTrigger::FallingEdge)
+    let captures = CaptureParts7::config(periph.TB0, TimerConfig::aclk(&aclk))
+        .config_cap1_input_A(p4.pin7.to_alternate2())
+        .config_cap1_trigger(CapTrigger::RisingEdge)
         .commit();
     let mut capture = captures.cap1;
 
