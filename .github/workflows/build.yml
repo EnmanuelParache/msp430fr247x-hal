@@ -16,9 +16,9 @@ jobs:
       - name: Install msp430-elf-gcc
         shell: bash
         run: |
-          curl -LO http://software-dl.ti.com/msp430/msp430_public_sw/mcu/msp430/MSPGCC/8_3_1_0/export/msp430-gcc-8.3.1.25_linux64.tar.bz2
-          tar xjf msp430-gcc-8.3.1.25_linux64.tar.bz2
-          echo "$GITHUB_WORKSPACE/msp430-gcc-8.3.1.25_linux64/bin" >> $GITHUB_PATH
+          curl -LO https://dr-download.ti.com/software-development/ide-configuration-compiler-or-debugger/MD-LlCjWuAbzH/9.3.1.2/msp430-gcc-9.3.1.11_linux64.tar.bz2
+          tar xjf msp430-gcc-9.3.1.11_linux64.tar.bz2
+          echo "$GITHUB_WORKSPACE/msp430-gcc-9.3.1.11_linux64/bin" >> $GITHUB_PATH
 
       - name: Check msp430-elf-gcc
         shell: bash
